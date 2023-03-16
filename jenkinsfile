@@ -1,8 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven "MAVEN"
-        jdk "JDK"
+        maven "maven3"
     }
     stages {
         stage('Initialize'){
@@ -13,8 +12,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                dir("/var/lib/jenkins/workspace/demopipelinetask/my-app") {
-                sh 'mvn -B -DskipTests clean package'
+                dir("/home/jenkins/workspace/java-pipeline") {
+                sh 'mvn clean install'
                 }
             }
         }
@@ -23,8 +22,9 @@ pipeline {
        always {
           junit(
         allowEmptyResults: true,
-        testResults: '*/test-reports/.xml'
-      )
+        testResults: '*/test-reports/.xml')
+        archiveArtifacts artifacts: '/target/surefire-reports/*.xml, /target/surefire-reports/*.txt, /target/*.jar', followSymlinks: false
+     
       }
    } 
 }
