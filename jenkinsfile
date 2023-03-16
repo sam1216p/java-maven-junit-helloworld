@@ -23,7 +23,7 @@ pipeline {
           junit(
         allowEmptyResults: true,
         testResults: '*/test-reports/.xml')
-        archiveArtifacts artifacts: '/target/surefire-reports/*.xml, /target/surefire-reports/*.txt, /target/*.jar', followSymlinks: false
+        archiveArtifacts artifacts: 'target/surefire-reports/*.xml, target/surefire-reports/*.txt, target/*.jar', followSymlinks: false
      
       }
    } 
