@@ -1,3 +1,5 @@
+def testReport = ""
+
 pipeline {
     agent any
     tools {
@@ -22,7 +24,7 @@ pipeline {
        always {
           junit(
         allowEmptyResults: true,
-        testResults: '*/test-reports/.xml')
+        testResults: 'target/surefire-reports/*.xml')
         archiveArtifacts artifacts: 'target/surefire-reports/*.xml, target/surefire-reports/*.txt, target/*.jar', followSymlinks: false
      
       }
